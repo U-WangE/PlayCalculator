@@ -22,9 +22,9 @@ public class MousePos : MonoBehaviour
         if(Input.GetMouseButtonUp(0))
         {
             if(!CameraChange.onGame)
-                cameraMode = 0;
+                cameraMode = 0;  // Calculator 일 때
             else
-                cameraMode = 1;
+                cameraMode = 1;  // Game 일 때
 
             // 마우스 위치
             Ray ray = getCamera[cameraMode].ScreenPointToRay(Input.mousePosition);

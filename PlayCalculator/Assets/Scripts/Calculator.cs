@@ -25,29 +25,31 @@ public class Calculator : MonoBehaviour
     void Update()
     {
         string[] btn = {"number", "math", "etc"};  // 눌린 버튼의 대분류
-        string[] click = MousePos.objectName.Split('_'); // _ 단위로 자름 : num_1 -> num, 1
 
-        if(!CameraChange.onGame)
-        {
-            // 숫자가 눌렸을 경우
-            if (btn[0].Contains(click[0]))
+        try {
+            string[] click = MousePos.objectName.Split('_'); // _ 단위로 자름 : num_1 -> num, 1
+            
+            if(!CameraChange.onGame)
             {
-                GetNumber(click[1]);
+                // 숫자가 눌렸을 경우
+                if (btn[0].Contains(click[0]))
+                {
+                    GetNumber(click[1]);
+                }
+                // 연산 기호가 눌렸을 경우
+                else if (btn[1].Contains(click[0]))
+                {
+                    GetMath(click[1]);
+                }
+                // 숫자, 연산 기호 이외의 버튼이 눌렸을 경우
+                else if (btn[2].Contains(click[0]))
+                {
+                    GetEtc(click[1]);
+                }
             }
-            // 연산 기호가 눌렸을 경우
-            else if (btn[1].Contains(click[0]))
-            {
-                GetMath(click[1]);
-            }
-            // 숫자, 연산 기호 이외의 버튼이 눌렸을 경우
-            else if (btn[2].Contains(click[0]))
-            {
-                GetEtc(click[1]);
-            }
+        } catch(NullReferenceException ex) {
+            Debug.Log("MousePos doesn't point to anything. From Calculator.cs");
         }
-
-        // 마우스 클릭 초기화
-        MousePos.objectName = null;
     }
 
     // 숫자 입력
